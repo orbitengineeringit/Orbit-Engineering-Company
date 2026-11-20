@@ -15,7 +15,7 @@ Use the owner-confirmed brand/address and the existing repository contact detail
 - Primary brand: Orbit Engineering; child company: Orbit Engineering Solutions. The child company is not a competitor.
 - Ground Floor, B-32/A Priyadarshini Colony, Sant Asharam Nagar Phase-1, Bagsewaniya, Bhopal, Madhya Pradesh 462043.
 - Main phone: +91 98930 91450. Secondary: +91 88177 70367.
-- WhatsApp: +91 9039075048.
+- WhatsApp: +91 98930 91450.
 - Monday–Saturday, 10:00 AM–7:00 PM; Sunday closed.
 
 **Update older listings:** the old [production contact page](https://orbitengineerings.com/contact/) states First Floor, Shalimar Enclave, 12/2, E-3, Arera Colony, Bhopal 462016. The owner has now confirmed the Ground Floor B-32/A address above; deploy it and correct older listings, map details and cached business citations. The old about page also mentions Char Imli, Arera Colony and Katara Hills offices; do not publish them as additional current branches without confirmation. Keep the map pin accurate and do not invent coordinates.

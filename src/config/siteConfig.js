@@ -50,8 +50,8 @@ export const siteConfig = {
     contact: {
       phonePrimary: "+91 98930 91450",
       phoneSecondary: "+91 88177 70367",
-      whatsapp: "+91 9039075048",
-      whatsappLink: "https://wa.me/919039075048?text=Hello%20Orbit%20Engineering%20Solutions,%20I%20am%20interested%20in%20discussing%20a%20project.",
+      whatsapp: "+91 98930 91450",
+      whatsappLink: "https://wa.me/919893091450?text=Hello%20Orbit%20Engineering%20Solutions,%20I%20am%20interested%20in%20discussing%20a%20project.",
       emails: [],
       hours: "Monday – Saturday: 10:00 AM – 7:00 PM (Sunday Closed)",
       indiamart: "https://www.indiamart.com/orbit-engineering-solutions-bhopal/"

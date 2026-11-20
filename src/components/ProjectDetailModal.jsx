@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { siteConfig } from '../config/siteConfig';
 import { assetPath } from '../config/deployment';
 import { 
   X, 
@@ -125,7 +126,7 @@ export default function ProjectDetailModal({ project, onClose, onOpenQuote }) {
           {/* Footer Action Buttons */}
           <div className="p-4 sm:p-6 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3">
             <a
-              href={`https://wa.me/919039075048?text=Hello%20Orbit%20Engineering,%20I%20want%20to%20discuss%20a%20project%20similar%20to:%20${encodeURIComponent(project.name)}`}
+              href={`https://wa.me/${siteConfig.company.contact.whatsapp.replace(/\D/g, '')}?text=Hello%20Orbit%20Engineering,%20I%20want%20to%20discuss%20a%20project%20similar%20to:%20${encodeURIComponent(project.name)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-semibold text-emerald-800 bg-emerald-100 hover:bg-emerald-200 rounded-xl transition-colors"
