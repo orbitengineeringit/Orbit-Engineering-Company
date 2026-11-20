@@ -13,3 +13,8 @@ dist-ssr
 .env.*
 !.env.example
 builds/
+# Temporary QA and debug artifacts
+*.cjs
+qa_*.png
+hero_fix_*.png
+test_chrome.png

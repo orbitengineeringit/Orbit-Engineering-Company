@@ -142,6 +142,7 @@ lines.push(
   'AddType image/jpeg .jpg .jpeg',
   'AddType application/pdf .pdf',
   'AddType video/mp4 .mp4',
+  'AddType font/woff2 .woff2',
   'AddCharset UTF-8 .html .js .mjs .css .json .xml .txt',
   '',
 );

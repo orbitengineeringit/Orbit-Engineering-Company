@@ -18,7 +18,8 @@
     "seo:check": "node scripts/check-build.mjs",
     "hosting:check": "node scripts/check-deployment.mjs",
     "seo:indexnow": "node scripts/submit-indexnow.mjs",
-    "seo:release": "npm run seo:check && node scripts/package-release.mjs"
+    "seo:release": "npm run seo:check && node scripts/package-release.mjs",
+    "test:engineering": "node scripts/test-engineering-tools.mjs"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.4",

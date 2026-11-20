@@ -2,6 +2,7 @@ import { siteConfig } from './siteConfig';
 import { servicePages } from '../data/seoContent';
 import { PRODUCT_CATEGORIES } from '../data/products';
 import { procurementGuide } from '../data/procurementGuide';
+import { engineeringGuides, engineeringTools, projectExperiences, learningResources } from '../data/learningResources';
 import { assetPath, sitePath, INDEXABLE } from './deployment';
 
 const configuredUrl = import.meta.env.VITE_SITE_URL || 'https://orbitengineering.com';
@@ -20,13 +21,18 @@ export const corePages = [
   { id: 'products', path: '/products', title: 'Flow Meters, PLC Panels & Water Treatment Products | Orbit Engineering', description: 'Browse Orbit Engineering’s flow meters, water quality analyzers, pressure and level instruments, valves, actuators, PLC panels and solar equipment in Bhopal.' },
   { id: 'ecosystem', path: '/ecosystem', title: 'Clients & Technology Ecosystem | Orbit Engineering', description: 'Explore Orbit Engineering’s water infrastructure and industrial technology ecosystem, with client applications, instrumentation and automation platforms.' },
   { id: 'contact', path: '/contact', title: 'Contact Orbit Engineering | Bhopal Address, Phone & Enquiries', description: 'Contact Orbit Engineering in Bhopal, Madhya Pradesh for water treatment, industrial automation, instrumentation, project quotations and service support.' },
+  { id: 'resources', path: '/resources', shortTitle: 'Resources', title: 'Water Engineering Guides & Calculators | Orbit Engineering', description: 'Compare flow meters, plan PLC and SCADA systems, calculate pipe velocity and pump energy, and explore water engineering project experience in Madhya Pradesh.' },
+  { id: 'project-experience', path: '/project-experience', shortTitle: 'Project experience', title: 'Water & Automation Project Experience in MP | Orbit Engineering', description: 'Explore Orbit Engineering’s recorded water plant, instrumentation and automation work in Bhopal, Betul, Mandideep and Pilukhedi, Madhya Pradesh.' },
 ];
 
 export const seoPages = [
   ...corePages,
   ...servicePages.map(service => ({ id: service.id, path: service.path, type: 'service', service, title: `${service.title} | Orbit Engineering`, description: service.description })),
-  ...PRODUCT_CATEGORIES.map(category => ({ id: category.id, path: `/products/${category.id}`, type: 'category', category, title: `${category.name} in Bhopal | Orbit Engineering`, description: `Explore ${category.name.toLowerCase()} from Orbit Engineering Solutions, Bhopal. ${category.tagline}` })),
+  ...PRODUCT_CATEGORIES.map(category => ({ id: category.id, path: `/products/${category.id}`, type: 'category', category, title: `${category.name} in Bhopal | Orbit Engineering`, description: `Explore ${category.name.toLowerCase()} from Orbit Engineering, Bhopal. ${category.tagline}` })),
   { id: procurementGuide.id, path: procurementGuide.path, type: 'guide', title: `${procurementGuide.title} | Orbit Engineering`, description: procurementGuide.description, guide: procurementGuide },
+  ...engineeringGuides.map(guide => ({ id: guide.id, path: guide.path, type: 'guide', guide, title: `${guide.title} | Orbit Engineering`, description: guide.description })),
+  ...engineeringTools.map(tool => ({ id: tool.id, path: tool.path, type: 'tool', tool, title: `${tool.title} | Orbit Engineering`, description: tool.description })),
+  ...projectExperiences.map(project => ({ id: project.id, path: project.path, type: 'project', project, title: `${project.title} | Orbit Engineering`, description: project.description })),
 ];
 
 const aliases = { home: '/', team: '/about', service: '/solutions', services: '/solutions', solution: '/solutions', projects: '/solutions' };
@@ -49,23 +55,28 @@ export function structuredData(page) {
   const { company } = siteConfig;
   const url = absoluteUrl(page.path);
   const graph = [
-    { '@type': 'ProfessionalService', '@id': companyId, name: company.name, alternateName: ['Orbit Engineering Co.', 'Orbit Engineering Company'], url: absoluteUrl('/'), logo: absoluteUrl('/logo.png'), image: absoluteUrl('/images/design-v2/about-engineering.webp'), description: 'Water infrastructure, industrial automation and instrumentation engineering in Bhopal, Madhya Pradesh.', telephone: company.contact.phonePrimary, email: company.contact.emails[0], address: { '@type': 'PostalAddress', ...company.offices[0].structuredAddress }, areaServed: [{ '@type': 'AdministrativeArea', name: 'Madhya Pradesh' }, { '@type': 'Country', name: 'India' }], openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '10:00', closes: '19:00' }], hasMap: company.offices[0].mapsUrl, subOrganization: { '@id': absoluteUrl('/#solutions-organization') }, contactPoint: [{ '@type': 'ContactPoint', telephone: company.contact.phonePrimary, email: company.contact.emails[0], contactType: 'project enquiries', areaServed: 'IN' }] },
+    { '@type': 'ProfessionalService', '@id': companyId, name: company.name, alternateName: ['Orbit Engineering Co.', 'Orbit Engineering Company'], url: absoluteUrl('/'), logo: absoluteAsset('/logo.png'), image: absoluteAsset('/images/design-v2/about-engineering.webp'), description: 'Water infrastructure, industrial automation and instrumentation engineering in Bhopal, Madhya Pradesh.', telephone: company.contact.phonePrimary, ...(company.contact.emails?.[0] ? { email: company.contact.emails[0] } : {}), address: { '@type': 'PostalAddress', ...company.offices[0].structuredAddress }, areaServed: [{ '@type': 'AdministrativeArea', name: 'Madhya Pradesh' }, { '@type': 'Country', name: 'India' }], openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '10:00', closes: '19:00' }], hasMap: company.offices[0].mapsUrl, subOrganization: { '@id': absoluteUrl('/#solutions-organization') }, contactPoint: [{ '@type': 'ContactPoint', telephone: company.contact.phonePrimary, ...(company.contact.emails?.[0] ? { email: company.contact.emails[0] } : {}), contactType: 'project enquiries', areaServed: 'IN' }] },
     { '@type': 'Organization', '@id': absoluteUrl('/#solutions-organization'), name: company.childCompanyName, alternateName: 'OES', url: company.childCompanyUrl, parentOrganization: { '@id': companyId }, sameAs: [company.contact.indiamart] },
     { '@type': 'WebSite', '@id': websiteId, url: absoluteUrl('/'), name: company.name, alternateName: 'Orbit Engineering', publisher: { '@id': companyId }, inLanguage: 'en-IN' },
-    { '@type': page.type === 'category' || ['products', 'solutions', 'ecosystem'].includes(page.id) ? 'CollectionPage' : page.id === 'contact' ? 'ContactPage' : page.id === 'about' ? 'AboutPage' : 'WebPage', '@id': `${url}#webpage`, url, name: page.title, description: page.description, isPartOf: { '@id': websiteId }, about: { '@id': companyId }, inLanguage: 'en-IN', ...(page.type === 'service' ? { mainEntity: { '@id': `${url}#service` } } : {}) },
+    { '@type': page.type === 'category' || ['products', 'solutions', 'ecosystem', 'resources', 'project-experience'].includes(page.id) ? 'CollectionPage' : page.id === 'contact' ? 'ContactPage' : page.id === 'about' ? 'AboutPage' : 'WebPage', '@id': `${url}#webpage`, url, name: page.title, description: page.description, isPartOf: { '@id': websiteId }, about: { '@id': companyId }, inLanguage: 'en-IN', ...(page.type === 'service' ? { mainEntity: { '@id': `${url}#service` } } : ['guide', 'project'].includes(page.type) ? { mainEntity: { '@id': `${url}#article` } } : page.type === 'tool' ? { mainEntity: { '@id': `${url}#calculator` } } : {}) },
   ];
   if (page.path !== '/' && !page.noindex) {
     const crumbs = [{ name: 'Home', item: absoluteUrl('/') }];
     if (page.type === 'service' || page.type === 'category') crumbs.push({ name: page.type === 'service' ? 'Solutions' : 'Products', item: absoluteUrl(page.type === 'service' ? '/solutions' : '/products') });
-    crumbs.push({ name: page.service?.shortTitle || page.category?.name || page.guide?.shortTitle || page.id[0].toUpperCase() + page.id.slice(1), item: url });
+    if (page.type === 'guide' || page.type === 'tool') crumbs.push({ name: page.id === procurementGuide.id ? 'Solutions' : 'Resources', item: absoluteUrl(page.id === procurementGuide.id ? '/solutions' : '/resources') });
+    if (page.type === 'project') crumbs.push({ name: 'Project experience', item: absoluteUrl('/project-experience') });
+    crumbs.push({ name: page.service?.shortTitle || page.category?.name || page.guide?.shortTitle || page.tool?.shortTitle || page.project?.shortTitle || page.shortTitle || page.id[0].toUpperCase() + page.id.slice(1), item: url });
     graph.push({ '@type': 'BreadcrumbList', itemListElement: crumbs.map((crumb, i) => ({ '@type': 'ListItem', position: i + 1, ...crumb })) });
   }
   if (page.type === 'service') {
     graph.push({ '@type': 'Service', '@id': `${url}#service`, name: page.service.title, description: page.service.description, serviceType: page.service.shortTitle, provider: { '@id': companyId }, areaServed: [{ '@type': 'AdministrativeArea', name: 'Madhya Pradesh' }, { '@type': 'Country', name: 'India' }], url });
-    if (page.service.faqs.length) graph.push({ '@type': 'FAQPage', '@id': `${url}#faq`, mainEntity: page.service.faqs.map(faq => ({ '@type': 'Question', name: faq.question, acceptedAnswer: { '@type': 'Answer', text: faq.answer } })) });
   }
   if (page.type === 'category') graph.push({ '@type': 'ItemList', name: page.category.name, itemListElement: page.category.products.map((product, i) => ({ '@type': 'ListItem', position: i + 1, name: product.name, url: `${url}#${product.id}` })) });
-  if (page.type === 'guide') graph.push({ '@type': 'Article', '@id': `${url}#article`, headline: page.guide.title, description: page.guide.description, author: { '@id': companyId }, publisher: { '@id': companyId }, mainEntityOfPage: { '@id': `${url}#webpage` }, inLanguage: 'en-IN' });
+  const entry = page.guide || page.project || page.tool || page.service;
+  if (entry?.faqs?.length) graph.push({ '@type': 'FAQPage', '@id': `${url}#faq`, mainEntity: entry.faqs.map(faq => ({ '@type': 'Question', name: faq.question, acceptedAnswer: { '@type': 'Answer', text: faq.answer } })) });
+  if (page.type === 'guide' || page.type === 'project') graph.push({ '@type': 'Article', '@id': `${url}#article`, headline: entry.title, description: entry.description, author: { '@id': companyId }, publisher: { '@id': companyId }, mainEntityOfPage: { '@id': `${url}#webpage` }, inLanguage: 'en-IN', ...(entry.sources?.length ? { citation: entry.sources.map(source => source.url) } : {}), ...(page.project ? { contentLocation: { '@type': 'Place', name: page.project.location } } : {}) });
+  if (page.type === 'tool') graph.push({ '@type': 'WebApplication', '@id': `${url}#calculator`, name: entry.title, description: entry.description, url, applicationCategory: 'UtilitiesApplication', operatingSystem: 'Any', browserRequirements: 'JavaScript is required for interactive calculations.', isAccessibleForFree: true, publisher: { '@id': companyId } });
+  if (page.id === 'resources' || page.id === 'project-experience') graph.push({ '@type': 'ItemList', name: page.shortTitle, itemListElement: (page.id === 'resources' ? learningResources : projectExperiences).map((item, index) => ({ '@type': 'ListItem', position: index + 1, name: item.shortTitle, url: absoluteUrl(item.path) })) });
   return { '@context': 'https://schema.org', '@graph': graph };
 }
 
@@ -79,7 +90,7 @@ export function renderSeoHead(page) {
     meta('name', 'description', page.description),
     meta('name', 'robots', page.noindex || !INDEXABLE ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'),
     ...(page.noindex ? [] : [`<link data-seo rel="canonical" href="${escapeHtml(url)}" />`]),
-    meta('property', 'og:type', 'website'), meta('property', 'og:site_name', siteConfig.company.name), meta('property', 'og:locale', 'en_IN'),
+    meta('property', 'og:type', ['guide', 'project'].includes(page.type) ? 'article' : 'website'), meta('property', 'og:site_name', siteConfig.company.name), meta('property', 'og:locale', 'en_IN'),
     meta('property', 'og:title', page.title), meta('property', 'og:description', page.description), meta('property', 'og:url', url), meta('property', 'og:image', image), meta('property', 'og:image:alt', 'Water treatment infrastructure — Orbit Engineering'),
     meta('name', 'twitter:card', 'summary_large_image'), meta('name', 'twitter:title', page.title), meta('name', 'twitter:description', page.description), meta('name', 'twitter:image', image), meta('name', 'twitter:image:alt', 'Water treatment infrastructure — Orbit Engineering'),
     ...(import.meta.env.VITE_GOOGLE_SITE_VERIFICATION ? [meta('name', 'google-site-verification', import.meta.env.VITE_GOOGLE_SITE_VERIFICATION)] : []),

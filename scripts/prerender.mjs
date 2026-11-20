@@ -28,8 +28,43 @@ for (const page of [...seoPages, { path: '/404' }]) {
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${(INDEXABLE ? seoPages : []).map(page => `  <url><loc>${escapeXml(url(page.path))}</loc></url>`).join('\n')}\n</urlset>\n`;
 await writeFile(path.join(output, 'sitemap.xml'), sitemap);
 await writeFile(path.join(output, 'robots.txt'), `User-agent: *\nAllow: /\n${INDEXABLE ? '\nSitemap: ' + url('/sitemap.xml') + '\n' : '\n# Preview: pages carry noindex metadata; crawling is allowed to see it.\n'}`);
-const llms = `# Orbit Engineering\n\n> Water infrastructure, industrial automation and instrumentation engineering in Bhopal, Madhya Pradesh, India. Orbit Engineering Solutions is a child company of Orbit Engineering.\n\nThis optional discovery file points to public source pages. Use the linked pages for the full details.\n\n## Company and contact\n\n- [Home](${SITE_ORIGIN}/)\n- [About Orbit Engineering](${SITE_ORIGIN}/about)\n- [Contact and office address](${SITE_ORIGIN}/contact)\n- [Clients and technology ecosystem](${SITE_ORIGIN}/ecosystem)\n\n## Engineering solutions\n\n${seoPages.filter(page => page.type === 'service').map(page => `- [${page.service.shortTitle}](${SITE_ORIGIN}${page.path}): ${page.description}`).join('\n')}\n\n## Product categories\n\n${seoPages.filter(page => page.type === 'category').map(page => `- [${page.category.name}](${SITE_ORIGIN}${page.path})`).join('\n')}\n\n## Buying guides\n\n${seoPages.filter(page => page.type === 'guide').map(page => `- [${page.guide.shortTitle}](${SITE_ORIGIN}${page.path}): ${page.description}`).join('\n')}\n`;
-await writeFile(path.join(output, 'llms.txt'), INDEXABLE ? llms.replace(/\]\((https:\/\/[^)]+)\)/g, (match, href) => `](${url(new URL(href).pathname)})`) : '# Preview build\n\nThis build is not intended for search indexing.\n');
+const discoveryLinks = (type, key) => seoPages.filter(page => page.type === type).map(page => `- [${page[key].shortTitle || page[key].name}](${url(page.path)}): ${page.description}`).join("\n");
+const llms = `# Orbit Engineering
+
+> Water infrastructure, industrial automation and instrumentation engineering in Bhopal, Madhya Pradesh, India. Orbit Engineering Solutions is a child company of Orbit Engineering.
+
+This optional directory links to public source pages. Use the pages for full details, assumptions and references.
+
+## Company and contact
+
+- [Home](${url("/")})
+- [About Orbit Engineering](${url("/about")})
+- [Contact and office address](${url("/contact")})
+- [Clients and technology ecosystem](${url("/ecosystem")})
+- [Engineering resources](${url("/resources")})
+- [Project experience](${url("/project-experience")})
+
+## Engineering solutions
+
+${discoveryLinks("service", "service")}
+
+## Product categories
+
+${discoveryLinks("category", "category")}
+
+## Engineering and buying guides
+
+${discoveryLinks("guide", "guide")}
+
+## Engineering calculators
+
+${discoveryLinks("tool", "tool")}
+
+## Project overviews
+
+${discoveryLinks("project", "project")}
+`;
+await writeFile(path.join(output, "llms.txt"), INDEXABLE ? llms : "# Preview build\n\nThis build is not intended for search indexing.\n");
 
 const env = { ...loadEnv('production', root, ''), ...process.env };
 const key = env.INDEXNOW_KEY?.trim();

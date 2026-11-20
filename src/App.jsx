@@ -12,6 +12,8 @@ import ContactPage from './pages/ContactPage';
 import ServiceDetailPage from './pages/ServiceDetailPage';
 import ProductCategoryPage, { ProductCategoryDirectory } from './pages/ProductCategoryPage';
 import ProcurementGuidePage from './pages/ProcurementGuidePage';
+import { ResourcesPage, ResourceArticlePage, EngineeringToolPage, ResourceRecommendations } from './pages/ResourcesPage';
+import { procurementGuide } from './data/procurementGuide';
 import SearchContent from './components/SearchContent';
 import { getPage, normalizePath, pathForPage, updateSeoHead } from './config/seo';
 import { siteConfig } from './config/siteConfig';
@@ -207,10 +209,14 @@ export default function App({ initialPath }) {
         )}
         {page.type === 'service' && <ServiceDetailPage key={page.id} service={page.service} onNavigate={handleNavigate} onOpenQuote={() => setQuoteModalOpen(true)} />}
         {page.type === 'category' && <ProductCategoryPage key={page.id} category={page.category} onNavigate={handleNavigate} />}
-        {page.type === 'guide' && <ProcurementGuidePage onNavigate={handleNavigate} />}
+        {page.type === 'guide' && (page.id === procurementGuide.id ? <ProcurementGuidePage onNavigate={handleNavigate} /> : <ResourceArticlePage key={page.id} entry={page.guide} onNavigate={handleNavigate} />)}
+        {page.type === 'project' && <ResourceArticlePage key={page.id} entry={page.project} type="project" onNavigate={handleNavigate} />}
+        {page.type === 'tool' && <EngineeringToolPage key={page.id} tool={page.tool} onNavigate={handleNavigate} />}
+        {!page.type && ['resources', 'project-experience'].includes(page.id) && <ResourcesPage projectsOnly={page.id === 'project-experience'} onNavigate={handleNavigate} />}
         {page.noindex && <section className="visual-container pt-40 pb-24"><h1 className="text-4xl font-bold mb-5">Page not found</h1><p className="mb-6">Explore our engineering solutions or contact the Bhopal team for help.</p><a href={sitePath('/solutions')} className="visual-button">Explore solutions</a></section>}
         {!page.type && !page.noindex && <SearchContent page={page.id} onNavigate={handleNavigate} />}
         {page.id === 'products' && !page.type && <ProductCategoryDirectory onNavigate={handleNavigate} />}
+        {(['service', 'category'].includes(page.type) || ['home', 'ecosystem'].includes(page.id)) && <ResourceRecommendations servicePath={page.service?.path} categoryId={page.category?.id} onNavigate={handleNavigate} />}
       </main>
 
       {/* Footer */}

@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { securityHeaders, blockedPublicPath } from './security-policy.mjs';
 
 const root = await realpath(process.env.PREVIEW_DIR ? path.resolve(process.env.PREVIEW_DIR) : fileURLToPath(new URL('../dist/', import.meta.url)));
-const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.json': 'application/json; charset=utf-8', '.txt': 'text/plain; charset=utf-8', '.xml': 'application/xml; charset=utf-8', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.avif': 'image/avif', '.pdf': 'application/pdf', '.mp4': 'video/mp4' };
+const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.json': 'application/json; charset=utf-8', '.txt': 'text/plain; charset=utf-8', '.xml': 'application/xml; charset=utf-8', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.avif': 'image/avif', '.pdf': 'application/pdf', '.mp4': 'video/mp4', '.woff2': 'font/woff2' };
 const hosting = JSON.parse(await readFile(new URL('../vercel.json', import.meta.url), 'utf8'));
 const manifest = JSON.parse(await readFile(path.join(root, 'seo-manifest.json'), 'utf8'));
 const cleanRoutes = new Set([...manifest.pages.map(page => page.path), '/404']);
@@ -54,7 +54,7 @@ http.createServer(async (request, response) => {
     const logicalPath = pathname.replace(/\/+$/, '') || '/';
     if (directoryStyle && pathname !== '/' && cleanRoutes.has(logicalPath) && !pathname.endsWith('/')) return redirect(pathname + '/');
     if (!directoryStyle && pathname !== '/' && pathname.endsWith('/') && cleanRoutes.has(logicalPath)) return redirect(logicalPath);
-    if (!directoryStyle && Object.hasOwn(redirects, pathname)) return redirect(redirects[pathname]);
+    if (!directoryStyle && Object.hasOwn(redirects, logicalPath)) return redirect(redirects[logicalPath]);
     if (!directoryStyle && pathname.endsWith('.html') && cleanRoutes.has(pathname.slice(0, -5))) return redirect(pathname.slice(0, -5));
     const relative = pageFiles.get(logicalPath) || (logicalPath === '/404' ? '404.html' : directoryStyle && pathname.endsWith('/') ? pathname.slice(1) + 'index.html' : pathname.slice(1) + (path.extname(pathname) || directoryStyle ? '' : '.html'));
     let file = path.resolve(root, relative);

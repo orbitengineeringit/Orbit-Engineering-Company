@@ -27,9 +27,11 @@ function QuoteDialog({ onClose }) {
     <div className="orbit-quote__body">
       {prepared ? <div className="orbit-quote__review" aria-live="polite">
         <CheckCircle2 size={38} /><h3>Your enquiry is ready, {form.name}.</h3>
-        <p>Choose WhatsApp or email to send these details to our engineering team. Your enquiry will be sent when you confirm in the selected app.</p>
+        <p>{siteConfig.company.contact.emails?.[0] ? 'Choose WhatsApp or email to send these details to our engineering team. Your enquiry will be sent when you confirm in the selected app.' : 'Send these details to our engineering team via WhatsApp. Your enquiry will be sent when you confirm in the app.'}</p>
         <a href={'https://wa.me/' + siteConfig.company.contact.whatsapp.replace(/\D/g, '') + '?text=' + encodeURIComponent(message)} target="_blank" rel="noopener noreferrer" className="visual-button"><MessageSquare size={18} />Send via WhatsApp</a>
-        <a href={'mailto:' + siteConfig.company.contact.emails[0] + '?subject=' + encodeURIComponent('Project enquiry: ' + form.service) + '&body=' + encodeURIComponent(message)} className="visual-button visual-button--secondary"><Mail size={18} />Send by email</a>
+        {siteConfig.company.contact.emails?.[0] && (
+          <a href={'mailto:' + siteConfig.company.contact.emails[0] + '?subject=' + encodeURIComponent('Project enquiry: ' + form.service) + '&body=' + encodeURIComponent(message)} className="visual-button visual-button--secondary"><Mail size={18} />Send by email</a>
+        )}
         <button type="button" onClick={() => setPrepared(false)} className="orbit-quote__edit">Edit my details</button>
       </div> : <form onSubmit={event => { event.preventDefault(); setPrepared(true); }}>
         <p>Tell us a little about your project.</p>
@@ -42,7 +44,7 @@ function QuoteDialog({ onClose }) {
         <label htmlFor="quote-service">What can we help with?<select id="quote-service" name="service" value={form.service} onChange={change}>{['Water treatment', 'SCADA & automation', 'Pumping & pipelines', 'Metering & instrumentation', 'Solar water solutions', 'Operation & maintenance', 'DPR / tender / BOQ'].map(service => <option key={service}>{service}</option>)}</select></label>
         <label htmlFor="quote-message">Project details<textarea id="quote-message" name="message" rows="3" maxLength={1500} value={form.message} onChange={change} placeholder="Location, capacity and what you have in mind…" /></label>
         <button type="submit" className="visual-button">Review your enquiry<ArrowRight size={18} /></button>
-        <small>You’ll choose WhatsApp or email on the next step to send it.</small>
+        <small>{siteConfig.company.contact.emails?.[0] ? 'You’ll choose WhatsApp or email on the next step to send it.' : 'You’ll send it via WhatsApp on the next step.'}</small>
       </form>}
     </div>
   </dialog>;

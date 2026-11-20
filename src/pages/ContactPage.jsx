@@ -25,7 +25,7 @@ export default function ContactPage() {
   const office = siteConfig.company.offices[0];
   const inquiryText = `Hello Orbit Engineering Solutions,\n\nName: ${formData.name || 'Client'}\nOrganization: ${formData.organization || 'N/A'}\nPhone: ${formData.phone || 'N/A'}\nEmail: ${formData.email || 'N/A'}\nInterest: ${formData.serviceType}\n\nProject: ${formData.message || 'I would like a quotation and technical review.'}`;
   const whatsappUrl = `https://wa.me/${contact.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(inquiryText)}`;
-  const emailUrl = `mailto:${contact.emails[0]}?subject=${encodeURIComponent(`Project inquiry: ${formData.serviceType}`)}&body=${encodeURIComponent(inquiryText)}`;
+  const emailUrl = contact.emails?.[0] ? `mailto:${contact.emails[0]}?subject=${encodeURIComponent(`Project inquiry: ${formData.serviceType}`)}&body=${encodeURIComponent(inquiryText)}` : null;
 
   const updateField = event => setFormData(current => ({ ...current, [event.target.name]: event.target.value }));
   const nextStep = event => {
@@ -76,14 +76,14 @@ export default function ContactPage() {
                 <span className="contact-ready-icon"><CheckCircle2 size={34} /></span>
                 <span className="visual-eyebrow">ONE STEP TO CONNECT</span>
                 <h2>Your project brief is ready.</h2>
-                <p>Thanks, {formData.name}. Send your brief through WhatsApp or your email app to connect with Orbit.</p>
+                <p>Thanks, {formData.name}. Send your brief through WhatsApp{emailUrl ? ' or your email app' : ''} to connect with Orbit.</p>
                 <div className="contact-summary">
                   <span>{selectedService?.label}</span>
                   <strong>{formData.name}</strong>
                   <span>{formData.phone}{formData.organization ? ` · ${formData.organization}` : ''}</span>
                 </div>
                 <a className="visual-button contact-whatsapp-button" href={whatsappUrl} target="_blank" rel="noopener noreferrer"><MessageSquare size={18} /> Send via WhatsApp <ArrowRight size={17} /></a>
-                <a className="visual-button visual-button--secondary" href={emailUrl}><Mail size={18} /> Send via email</a>
+                {emailUrl && <a className="visual-button visual-button--secondary" href={emailUrl}><Mail size={18} /> Send via email</a>}
                 <button type="button" className="contact-text-button" onClick={() => { setSubmitted(false); setStep(3); }}>Edit project brief</button>
               </div>
             ) : (
@@ -139,7 +139,7 @@ export default function ContactPage() {
                     {step > 1 && <button type="button" onClick={() => setStep(current => current - 1)} className="contact-back-button"><ArrowLeft size={17} /> Back</button>}
                     {step < 3 ? <button type="button" disabled={step === 1 && !selectedService} onClick={nextStep} className="visual-button">Continue <ArrowRight size={17} /></button> : <button type="submit" className="visual-button">Review project brief <ArrowRight size={17} /></button>}
                   </div>
-                  <p className="contact-form-note">Your brief is sent when you choose WhatsApp or email in the next step.</p>
+                  <p className="contact-form-note">Your brief is sent when you choose WhatsApp{contact.emails?.[0] ? ' or email' : ''} in the next step.</p>
                 </form>
               </>
             )}
@@ -150,8 +150,13 @@ export default function ContactPage() {
             </MotionPhoto>
             <div className="contact-direct">
               <span className="visual-eyebrow">PREFER A DIRECT CONNECTION?</span>
-              <a href={`tel:${contact.phonePrimary}`}><span className="contact-channel-icon"><Phone size={20} /></span><span><small>CALL OUR TEAM</small><strong>{contact.phonePrimary}</strong></span><ArrowRight size={18} /></a>
-              <a href={`mailto:${contact.emails[0]}`}><span className="contact-channel-icon"><Mail size={20} /></span><span><small>DROP US A LINE</small><strong>{contact.emails[0]}</strong></span><ArrowRight size={18} /></a>
+              <a href={`tel:${contact.phonePrimary.replace(/\s+/g, '')}`}><span className="contact-channel-icon"><Phone size={20} /></span><span><small>CALL OUR TEAM</small><strong>{contact.phonePrimary}</strong></span><ArrowRight size={18} /></a>
+              {contact.phoneSecondary && (
+                <a href={`tel:${contact.phoneSecondary.replace(/\s+/g, '')}`}><span className="contact-channel-icon"><Phone size={20} /></span><span><small>SECONDARY LINE</small><strong>{contact.phoneSecondary}</strong></span><ArrowRight size={18} /></a>
+              )}
+              {contact.emails?.[0] && (
+                <a href={`mailto:${contact.emails[0]}`}><span className="contact-channel-icon"><Mail size={20} /></span><span><small>DROP US A LINE</small><strong>{contact.emails[0]}</strong></span><ArrowRight size={18} /></a>
+              )}
               <a href={contact.whatsappLink} target="_blank" rel="noopener noreferrer"><span className="contact-channel-icon"><MessageSquare size={20} /></span><span><small>LET'S CHAT</small><strong>Connect on WhatsApp</strong></span><ArrowRight size={18} /></a>
               <p className="contact-hours"><Clock size={16} /> {contact.hours}</p>
             </div>

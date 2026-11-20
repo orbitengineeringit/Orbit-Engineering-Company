@@ -60,6 +60,6 @@ Before relaunch:
 
 ## Contact reconciliation
 
-The legacy [parent contact page](https://www.orbitengineering.com/page/contact) lists the B-32/A Bhopal location and **+91 7024128029**, matching the repository's primary mobile. It also lists landline **0755-4059085**, mobiles **8817770367 / 9893091450**, and **sales@orbitengineering.com / mktiwari@orbitengineering.com**. Its footer says **7024128028**, an internal discrepancy. Keep the current repository contacts unless the owner confirms replacements; changing the website's canonical domain does not authorize creating or asserting new email inboxes.
+The legacy [parent contact page](https://www.orbitengineering.com/page/contact) lists the B-32/A Bhopal location. The owner confirmed updating primary and secondary mobile numbers to **+91 98930 91450** and **+91 88177 70367**, and removing **info@orbitengineerings.com**.
 
 Use the owner-confirmed address everywhere: **Ground Floor, B-32/A Priyadarshini Colony, Sant Asharam Nagar Phase-1, Bagsewaniya, Bhopal, Madhya Pradesh 462043**. `Orbit Engineering Co.` is a real legacy site label; do not infer a legal entity registration or add `Inc.` merely from old copy.

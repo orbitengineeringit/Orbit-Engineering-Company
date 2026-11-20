@@ -1,13 +1,27 @@
 import { writeFile, mkdir, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import { securityHeaders } from './security-policy.mjs';
+
+// A provider splat matches every descendant, including directory index files.
+// Group siblings instead of allocating two rules to each rendered page. Keep
+// root files exact and remove covered paths so Cache-Control is applied once.
+// Both providers support this form, but concatenate overlapping header values:
+// https://developers.cloudflare.com/pages/configuration/headers/
+// https://docs.netlify.com/manage/routing/headers/
+function compactCachePaths(paths) {
+  const directories = new Set(paths.filter(urlPath => urlPath.indexOf('/', 1) !== -1)
+    .map(urlPath => '/' + urlPath.split('/')[1] + '/'));
+  const rootPaths = paths.filter(urlPath => ![...directories].some(directory => urlPath.startsWith(directory)));
+  return [...new Set([...rootPaths, ...[...directories].map(directory => directory + '*')])].sort();
+}
+
 export async function generateStaticHosting({ manifest, redirects, outputDirectory, publicDirectory }) {
   await mkdir(outputDirectory, { recursive: true });
   // Both providers may combine repeated header values. Use disjoint cache
   // patterns, so assets never inherit two different max-age directives.
   const pagePaths = [...new Set(manifest.pages.flatMap(page => [new URL(page.url).pathname, '/' + page.outputFile]))];
   const rootFiles = (await readdir(publicDirectory, { withFileTypes: true })).filter(entry => entry.isFile() && /\.(?:txt|xml|svg|png|webmanifest|json)$/i.test(entry.name)).map(entry => '/' + entry.name);
-  const cachePaths = [...new Set([...pagePaths, '/images/*', '/logos/*', ...rootFiles])];
+  const cachePaths = compactCachePaths([...pagePaths, '/images/*', '/logos/*', '/fonts/*', ...rootFiles]);
   const headers = ['/*', ...Object.entries(securityHeaders).map(([key, value]) => `  ${key}: ${value}`),
     ...(!manifest.indexable ? ['  X-Robots-Tag: noindex, follow'] : []), '',
     // Native 404s can match this wildcard too. Keep browser revalidation;
@@ -15,14 +29,18 @@ export async function generateStaticHosting({ manifest, redirects, outputDirecto
     '/assets/*', '  Cache-Control: public, max-age=0, must-revalidate', '',
     ...cachePaths.flatMap(urlPath => [urlPath, '  Cache-Control: public, max-age=0, must-revalidate', '']),
     '/404.html', '  X-Robots-Tag: noindex, follow', '  Cache-Control: no-store', ''].join('\n');
-  if (cachePaths.length + 3 > 100) throw new Error('Review Cloudflare Pages 100 header-rule limit after adding routes.');
+  if (cachePaths.length + 3 > 100) throw new Error('Cloudflare Pages header rules exceed 100 after directory compaction; review the route families/root files.');
+  if (headers.split('\n').some(line => line.length > 2000)) throw new Error('Cloudflare Pages header line exceeds its 2,000 character limit.');
   const legacy = redirects.filter(rule => !rule.has).map(rule => {
     const page = manifest.pages.find(page => page.path === rule.destination);
     if (!page) throw new Error('Unrendered migration destination');
-    return `${rule.source} ${new URL(page.url).pathname} 301`;
+    return { source: rule.source, destination: new URL(page.url).pathname };
   });
-  const cloudflare = [...legacy, ''].join('\n');
-  const netlify = [...legacy, '/* /404.html 404', ''].join('\n');
+  const redirectLine = rule => `${rule.source} ${rule.destination} 301`;
+  // Netlify normalizes trailing slashes before matching; Cloudflare distinguishes
+  // them. Add exact companions there, without redirecting arbitrary descendants.
+  const cloudflare = [...legacy.flatMap(rule => [redirectLine(rule), redirectLine({ ...rule, source: rule.source + '/' })]), ''].join('\n');
+  const netlify = [...legacy.map(redirectLine), '/* /404.html 404', ''].join('\n');
   await writeFile(path.join(outputDirectory, 'cloudflare-headers.txt'), headers);
   await writeFile(path.join(outputDirectory, 'cloudflare-redirects.txt'), cloudflare);
   await writeFile(path.join(outputDirectory, 'netlify-headers.txt'), headers);

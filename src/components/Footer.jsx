@@ -21,14 +21,14 @@ export default function Footer({ onNavigate, onOpenQuote }) {
       <div>
         <h3>Explore Orbit</h3>
         <nav aria-label="Footer navigation">{[
-          ['About us', 'about'], ['Our products', 'products'], ['Water solutions', 'solutions'], ['Our ecosystem', 'ecosystem'], ['Choosing an engineering partner', '/guides/choosing-water-treatment-automation-partner-bhopal'], ['Contact us', 'contact'],
+          ['About us', 'about'], ['Our products', 'products'], ['Water solutions', 'solutions'], ['Our ecosystem', 'ecosystem'], ['Engineering guides & calculators', '/resources'], ['Project experience', '/project-experience'], ['Choosing an engineering partner', '/guides/choosing-water-treatment-automation-partner-bhopal'], ['Contact us', 'contact'],
         ].map(([label, page]) => <PageLink key={page} page={page} onNavigate={onNavigate}>{label}<ArrowUpRight size={13} /></PageLink>)}</nav>
       </div>
       <div className="orbit-footer__contact">
         <h3>Let’s talk</h3>
         <a href={'tel:' + company.contact.phonePrimary}><Phone size={15} />{company.contact.phonePrimary}</a>
         <a href={'tel:' + company.contact.phoneSecondary}><Phone size={15} />{company.contact.phoneSecondary}</a>
-        <a href={'mailto:' + company.contact.emails[0]}><Mail size={15} />{company.contact.emails[0]}</a>
+        {company.contact.emails?.[0] && <a href={'mailto:' + company.contact.emails[0]}><Mail size={15} />{company.contact.emails[0]}</a>}
         <PageLink page="contact" onNavigate={onNavigate} onAction={onOpenQuote} className="orbit-footer__enquire">Start a conversation<ArrowUpRight size={15} /></PageLink>
       </div>
       <div className="orbit-footer__visit">

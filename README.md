@@ -27,6 +27,12 @@ See [SEO rollout and external account setup](docs/SEO-ROLLOUT.md) and [Bhopal co
 
 Edit business/contact facts in `src/config/siteConfig.js`, service guides in `src/data/seoContent.js`, products in `src/data/products.js`, and route metadata/schema in `src/config/seo.js`. Add only verifiable claims and keep schema consistent with visible content.
 
+The `/resources` hub connects engineering selection guides, two working calculators and `/project-experience` overviews to relevant services and product categories. Edit those records in `src/data/engineeringGuides.js`, `engineeringTools.js` and `projectExperience.js`; keep project claims tied to the recorded scope. Calculators display formulas, assumptions and worked examples before JavaScript, then enable interactive inputs after hydration. Run `npm run test:engineering` for numerical, unit-conversion and input-boundary checks.
+
+Inter is self-hosted under `public/fonts` with its OFL license and `font-display: swap`; typography does not require Google Fonts requests. The build respects hosting base paths for the font, new resources and canonical URLs. See the [90-day visibility and enquiry growth plan](docs/SEO-GROWTH-PLAN.md) for measurement and distribution work after an authorized launch. No traffic baseline, account connection or ranking increase is implied by a local build.
+
+See the [SEO expansion validation report](docs/SEO-VALIDATION.md) for the 47-page inventory, browser/calculator checks and the limits of local verification.
+
 Responsive WebP variants are saved locally in `public/images/responsive` and mapped by `src/data/responsiveImages.js`. Builds need no image service or Python runtime. After replacing one of the source images, refresh variants with `python scripts/optimize-images.py` using Python 3 and Pillow with WebP support. Originals are preserved. `ResponsiveImage` renders a normal image with intrinsic dimensions and `srcset`; supply `sizes` when the rendered slot is known, and retain full resolution for tall cropped hero scenes.
 
 For a future manual release, run `npm run seo:release` after building. It creates a checked ZIP and matching folder under ignored `.qa/releases`, preserving every Vite asset and omitting only proven unused public files. See [release packaging](docs/SEO-RELEASE.md) and [Apache prerequisites](docs/SEO-APACHE-DEPLOYMENT.md). These commands prepare local files; they never deploy or submit URLs.

@@ -78,7 +78,19 @@ for (const [route, page] of pages) {
   assert(text.split(/\s+/).length > 100, `${route}: initial HTML has too little content`);
   if (page.type === 'service') {
     assert(schema['@graph'].some(node => node['@type'] === 'Service'), `${route}: missing service entity`);
-    const faq = schema['@graph'].find(node => node['@type'] === 'FAQPage');
+  }
+  if (['guide', 'project'].includes(page.type)) {
+    const article = schema['@graph'].find(node => node['@type'] === 'Article');
+    assert(article && article.author['@id'] === business['@id'], `${route}: missing article or incorrect publisher attribution`);
+    for (const citation of article.citation || []) assert(html.includes(citation.replace(/&/g, '&amp;')), `${route}: schema citation is not a visible reference`);
+  }
+  if (page.type === 'tool') {
+    assert(schema['@graph'].some(node => node['@type'] === 'WebApplication' && node.isAccessibleForFree), `${route}: missing calculator entity`);
+    assert(html.includes('Worked example') || html.includes('worked example'), `${route}: missing static worked example`);
+    assert(html.includes('<noscript>'), `${route}: missing calculator no-JavaScript help`);
+  }
+  const faq = schema['@graph'].find(node => node['@type'] === 'FAQPage');
+  if (faq) {
     for (const question of faq?.mainEntity || []) {
       assert(text.includes(question.name), `${route}: schema FAQ question is not visible`);
       assert(text.includes(question.acceptedAnswer.text), `${route}: schema FAQ answer is not visible`);
@@ -101,12 +113,12 @@ for (const [route, page] of pages) {
     const local = decode(value);
     assert(!prefix || local === prefix || local.startsWith(prefix + '/'), `${route}: asset/link outside project prefix ${local}`);
     const logical = stripBase(local);
-    if (/^\/(?:assets|images|logos)\//.test(logical) || /^\/logo(?:-icon)?\.(svg|png)$/.test(logical)) {
+    if (/^\/(?:assets|images|logos|fonts)\//.test(logical) || /^\/logo(?:-icon)?\.(svg|png)$/.test(logical)) {
       await access(path.join(dist, decodeURIComponent(logical.slice(1)))).catch(() => { throw new Error(`${route}: missing prefixed asset ${local}`); });
     }
   }
   links.set(route, destinations);
-  for (const [, value] of matches(html, /(?:src|href)="(\/(?:assets|images|logos)\/[^"#?]+|\/logo(?:-icon)?\.(?:svg|png))"/g)) {
+  for (const [, value] of matches(html, /(?:src|href)="(\/(?:assets|images|logos|fonts)\/[^"#?]+|\/logo(?:-icon)?\.(?:svg|png))"/g)) {
     if (!checkedAssets.has(value)) { await access(path.join(dist, decodeURIComponent(value.slice(1)))).catch(() => { throw new Error(`${route}: missing local asset ${value}`); }); checkedAssets.add(value); }
   }
 }

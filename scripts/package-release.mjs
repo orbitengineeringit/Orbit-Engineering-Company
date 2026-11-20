@@ -183,6 +183,9 @@ for (const file of allFiles) {
   // Keep every generated width: a gallery may choose a srcSet candidate only
   // after interaction, so initial HTML alone cannot prove a width is unused.
   if (file.startsWith('images/responsive/')) retain(file, 'complete responsive images directory; includes every generated srcSet width');
+  // Ship local fonts together with their attribution/license files, even when
+  // a license is not linked from a public page or stylesheet.
+  if (file.startsWith('fonts/')) retain(file, 'complete self-hosted fonts directory including license and attribution');
   if (file.endsWith('.html')) retain(file, 'generated page or HTML verification file');
   if (!file.includes('/') && /\.(?:xml|txt|webmanifest)$/i.test(file)) retain(file, 'root discovery or verification file');
   if (file.startsWith('.well-known/')) retain(file, 'well-known public discovery/verification file');

@@ -330,14 +330,66 @@ try {
     await page.waitForSelector('dialog.orbit-quote[open]', { hidden: true });
   });
 
+  await check('Self-hosted font loads with the security policy', async () => {
+    await visit(page, home);
+    await page.evaluate(() => document.fonts.ready);
+    const font = await page.evaluate(() => ({
+      loaded: [...document.fonts].some(face => face.family.replace(/["']/g, '') === 'Inter' && face.status === 'loaded'),
+      resources: performance.getEntriesByType('resource').map(entry => entry.name),
+    }));
+    assert(font.loaded, 'Inter font must decode and load');
+    assert(font.resources.some(url => url.includes('/fonts/inter-latin-variable.woff2')), 'The local font must be requested');
+    assert(!font.resources.some(url => /fonts\.(googleapis|gstatic)\.com/.test(url)), 'Typography must not depend on Google Fonts requests');
+    const response = await fetch(new URL('/fonts/inter-latin-variable.woff2', preview));
+    assert.equal(response.status, 200);
+    assert.match(response.headers.get('content-type'), /font\/woff2/);
+  });
+
+  const replaceInput = async (selector, value) => {
+    await page.click(selector);
+    await page.keyboard.down('Control'); await page.keyboard.press('A'); await page.keyboard.up('Control');
+    await page.type(selector, String(value));
+  };
+  await check('Flow calculator unit conversion and invalid geometry', async () => {
+    await visit(page, routeByPath.get('/tools/pipe-flow-velocity-calculator'));
+    await page.waitForSelector('.engineering-calculator fieldset:not([disabled])');
+    await replaceInput('#input-flow', 1);
+    await page.select('#input-unit', 'ls');
+    await replaceInput('#input-diameter', 50);
+    await page.click('.engineering-calculator button[type="submit"]');
+    assert.match(await page.$eval('.calculator-result', node => node.innerText), /0\.509 m\/s/);
+    await replaceInput('#input-diameter', 0);
+    assert.equal(await page.$eval('#input-diameter', node => node.checkValidity()), false, 'Zero diameter must not submit');
+    assert.match(await page.$eval('.calculator-result', node => node.innerText), /Inputs changed/);
+  });
+  await check('Tool navigation resets state and pump energy handles zero runtime', async () => {
+    await page.click('.procurement-guide__breadcrumb a[href="/resources"]');
+    await waitForRoute(page, routeByPath.get('/resources'));
+    await page.click('main a[href="/tools/pump-energy-calculator"]');
+    await waitForRoute(page, routeByPath.get('/tools/pump-energy-calculator'));
+    await page.waitForSelector('.engineering-calculator fieldset:not([disabled])');
+    assert.equal(await page.$eval('#input-flow', node => node.value), '100', 'The second tool must start with its own default values');
+    assert.match(await page.$eval('.calculator-result', node => node.innerText), /12\.97 kW/);
+    await replaceInput('#input-hours', 0);
+    await page.click('.engineering-calculator button[type="submit"]');
+    const result = await page.$eval('.calculator-result', node => node.innerText);
+    assert.match(result, /0 kWh/); assert.match(result, /12\.97 kW/);
+  });
+
   await page.setViewport({ width: 390, height: 844, deviceScaleFactor: 1 });
-  const representativePaths = [...new Set(['/', '/about', '/products', '/solutions', '/ecosystem', '/contact', service.path, category.path, ...(guide ? [guide.path] : [])])];
+  const representativePaths = [...new Set(['/', '/about', '/products', '/solutions', '/ecosystem', '/contact', '/resources', '/project-experience', ...routes.filter(route => ['tool', 'project'].includes(route.type)).map(route => route.path), '/guides/electromagnetic-vs-ultrasonic-flow-meters', service.path, category.path, ...(guide ? [guide.path] : [])])];
   for (const routePath of representativePaths) await check(`390px layout ${routePath}`, async () => {
     const actual = await visit(page, routeByPath.get(routePath));
     assert.ok(actual.overflow <= 1, `Horizontal overflow is ${actual.overflow}px`);
     if (routePath === '/') await screenshot(page, 'seo-home-mobile.png');
     if (routePath === service.path) await screenshot(page, 'seo-service-mobile.png');
     if (routePath === category.path) await screenshot(page, 'seo-category-mobile.png');
+    if (routePath === '/resources') await screenshot(page, 'seo-resources-mobile.png');
+    if (routePath === '/guides/electromagnetic-vs-ultrasonic-flow-meters') await screenshot(page, 'seo-guide-mobile.png');
+    if (routePath === '/tools/pipe-flow-velocity-calculator') {
+      await page.$eval('.engineering-calculator', node => node.scrollIntoView({ block: 'start' }));
+      await screenshot(page, 'seo-calculator-mobile.png');
+    }
     return { overflow: actual.overflow };
   });
   await check('Mobile hidden decoration avoids image download', async () => {
@@ -380,6 +432,14 @@ try {
     await Promise.all([noJs.waitForNavigation({ waitUntil: 'domcontentloaded' }), noJs.click('header a[aria-label="Get in Touch"]')]);
     await settleFrame(noJs);
     assertMetadata(await readMetadata(noJs), routeByPath.get('/contact'));
+  });
+  await check('No-JS calculators expose worked examples and disable inactive controls', async () => {
+    for (const route of routes.filter(route => route.type === 'tool')) {
+      await visit(noJs, route, { hydration: false });
+      assert.equal(await noJs.$eval('.engineering-calculator fieldset', node => node.disabled), true);
+      assert.match(await noJs.$eval('main', node => node.innerText), /worked example/i);
+      assert(await noJs.$eval('.calculator-result', node => node.innerText.length > 100));
+    }
   });
   await noJs.close();
 

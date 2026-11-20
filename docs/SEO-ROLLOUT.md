@@ -1,6 +1,6 @@
 # Orbit Engineering SEO launch and growth guide
 
-Reviewed: 6 October 2026. Owner-confirmed primary production URL: **https://orbitengineering.com**.
+Reviewed: 13 October 2026. Owner-confirmed primary production URL: **https://orbitengineering.com**. All current changes remain local; deployment and external account changes are deferred at the owner's request. See the [90-day growth plan](SEO-GROWTH-PLAN.md) for measurement, content and distribution priorities after an eventual launch.
 
 The goal is more qualified enquiries for **Orbit Engineering**, the primary brand, and its child company **Orbit Engineering Solutions**, through branded, water engineering, automation and local searches. Technical improvements make pages accessible and understandable; rankings also depend on evidence, demand, competition and the searcher's location. Google does not guarantee crawling, indexing or ranking, even for compliant sites. No implementation can guarantee first place for every competitor/client name or availability on every network. [Google: how Search works](https://developers.google.com/search/docs/fundamentals/how-search-works)
 
@@ -14,13 +14,13 @@ Use the owner-confirmed brand/address and the existing repository contact detail
 
 - Primary brand: Orbit Engineering; child company: Orbit Engineering Solutions. The child company is not a competitor.
 - Ground Floor, B-32/A Priyadarshini Colony, Sant Asharam Nagar Phase-1, Bagsewaniya, Bhopal, Madhya Pradesh 462043.
-- Main phone: +91 70241 28029. Secondary: +91 9039075049.
-- WhatsApp: +91 9039075048; email: info@orbitengineerings.com.
+- Main phone: +91 98930 91450. Secondary: +91 88177 70367.
+- WhatsApp: +91 9039075048.
 - Monday–Saturday, 10:00 AM–7:00 PM; Sunday closed.
 
 **Update older listings:** the old [production contact page](https://orbitengineerings.com/contact/) states First Floor, Shalimar Enclave, 12/2, E-3, Arera Colony, Bhopal 462016. The owner has now confirmed the Ground Floor B-32/A address above; deploy it and correct older listings, map details and cached business citations. The old about page also mentions Char Imli, Arera Colony and Katara Hills offices; do not publish them as additional current branches without confirmation. Keep the map pin accurate and do not invent coordinates.
 
-The legacy [parent contact page](https://www.orbitengineering.com/page/contact) supports the B-32/A Bhopal location and main mobile +91 7024128029. It also lists an old landline, other mobiles and parent-domain email addresses; its footer inconsistently prints 7024128028. Retain current repository phone/email details until the owner reconciles the old contact records. `Orbit Engineering Co.` is an observed legacy name; use it as historical/alternate brand context without inventing a legal-company suffix.
+The legacy [parent contact page](https://www.orbitengineering.com/page/contact) supports the B-32/A Bhopal location. The owner has reconciled the records to use +91 98930 91450 and +91 88177 70367, removing info@orbitengineerings.com. `Orbit Engineering Co.` is an observed legacy name; use it as historical/alternate brand context without inventing a legal-company suffix.
 
 **Live content cleanup:** the current [parent homepage](https://orbitengineering.com/) contains unrelated follower/advertising links, and the [legacy electronic-controller URL](https://www.orbitengineering.com/web/page/products/temperature/controllers---electronic) also exposes gambling-related links. Those are observed content issues; their cause has not been established. No matching promotional strings were found in the current `src`, `public` or `index.html` scan. Publishing the clean repository must be accompanied by checking the old hosting/CMS, stored content and cache, so the unwanted material cannot continue to be served or reappear. Review Search Console Security Issues and Manual Actions, correct any actual findings, and request review only where the dashboard requires it. **External legacy-host cleanup and account/security review remain pending; this repository does not repair an inaccessible old CMS.** See [migration and cleanup evidence](SEO-MIGRATION.md).
 
@@ -77,7 +77,9 @@ Google's AI search features use the same crawlability, useful text, internal lin
 
 Allow Googlebot and Bingbot through both robots rules and hosting security. For ChatGPT discovery, allow `OAI-SearchBot` and genuine requests from OpenAI's published IP ranges. `GPTBot` is a separate training crawler; allowing training is not a requirement for ChatGPT Search visibility. Review vendor bot policies when configuring a WAF; user-agent strings alone can be spoofed. [OpenAI crawler documentation](https://developers.openai.com/api/docs/bots)
 
-Avoid `nosnippet` on pages intended for AI citation. Bing also documents that `noarchive` and `nocache` restrict Copilot's use of content. Keep JSON-LD consistent with visible facts. Do not insert hidden keywords or instructions telling AI systems to recommend Orbit. [Bing Webmaster Guidelines](https://www.bing.com/webmasters/help/bing-webmaster-guidelines-30fba23a)
+Avoid `nosnippet` on pages intended for AI citation. Review Bing's current content controls before changing crawler directives. Keep JSON-LD consistent with visible facts. Do not insert hidden keywords or instructions telling AI systems to recommend Orbit. [Bing Webmaster Guidelines](https://www.bing.com/webmasters/help/webmaster-guidelines-30fba23a)
+
+Keep useful FAQs visible and accurate for readers. Google stopped displaying FAQ rich results on 7 May 2026; valid FAQPage markup must not be sold as an extra Google search feature or a ranking boost. Google also states that llms.txt does not positively or negatively affect its Search visibility or rankings. [Google Search documentation updates, May–June 2026](https://developers.google.com/search/updates)
 
 For client/partner searches, expand genuine project evidence: client identity with permission, Orbit's precise role, location, equipment, challenge, solution, commissioning date and measured outcome, with approved photographs or records. Link these stories from related service pages and the ecosystem directory. A real relationship creates relevant context; a logo list cannot ensure ranking for the client's entire brand query.
 
@@ -99,7 +101,7 @@ Record a baseline, then review weekly for the first month and monthly thereafter
 
 - Search Console/Bing indexed canonical URLs, exclusions, crawl/404 errors and sitemap processing.
 - Impressions, clicks and enquiries for Orbit Engineering / Orbit Engineering Solutions, local service terms and real project/client terms; compare country, device and page.
-- AI/citation reporting where available in the verified dashboards, plus meaningful referred enquiries. [Bing AI Performance](https://www.bing.com/webmasters/help/ai-performance-9f8e7d6c)
+- AI/citation reporting where available in the verified dashboards, plus meaningful referred enquiries. Bing's cited-page and citation counts describe supported AI surfaces, not ranking position or guaranteed visits. [Bing AI Performance](https://blogs.bing.com/webmaster/2026/2/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview/)
 - Real customer outcomes: calls, qualified forms, WhatsApp enquiries, quotations and awarded projects. Add analytics to the owner's actual property when ready; the repository does not create analytics accounts.
 - Broken assets/links, certificate expiry, office details, project status and outdated specifications. Regenerate the build and sitemap whenever page content changes; use truthful modification dates.
 
