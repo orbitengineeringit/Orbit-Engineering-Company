@@ -326,7 +326,7 @@ export const searchPageContent = {
     eyebrow: 'Engineering from Bhopal',
     title: 'Water infrastructure. Connected engineering.',
     paragraphs: [
-      'Orbit Engineering is the main company, with Orbit Engineering Solutions as its child company. Based in Bhopal, Madhya Pradesh, our engineering work covers water treatment, wastewater systems, flow measurement, industrial automation, SCADA telemetry, field commissioning and maintenance.',
+      'Orbit Engineering is the main company, with Orbit Engineering Company as its child company. Based in Bhopal, Madhya Pradesh, our engineering work covers water treatment, wastewater systems, flow measurement, industrial automation, SCADA telemetry, field commissioning and maintenance.',
       'Explore a service below to see the engineering scope, relevant catalogue equipment, published project examples and the details needed for an enquiry.'
     ],
     hindiSummary: 'भोपाल स्थित Orbit Engineering मध्य प्रदेश की जल परियोजनाओं और औद्योगिक प्रणालियों के लिए जल शोधन, एसटीपी, ईटीपी, आरओ, फ्लो मीटर तथा पीएलसी/स्काडा ऑटोमेशन सेवाएँ प्रदान करती है। नई परियोजना, उपकरण चयन, स्थापना या रखरखाव पर चर्चा के लिए अपनी साइट का स्थान, आवश्यक क्षमता और उपलब्ध ड्रॉइंग हमारे साथ साझा करें।',
@@ -334,7 +334,7 @@ export const searchPageContent = {
     faqs: [
       { question: 'What does Orbit Engineering do?', answer: 'Orbit Engineering provides water treatment and wastewater engineering, flow metering, instrumentation, PLC / SCADA automation, telemetry, installation, commissioning, maintenance and solar water solutions.' },
       { question: 'Where is Orbit Engineering located?', answer: 'Orbit Engineering is based in Bhopal, Madhya Pradesh, India. The office address is Ground Floor, B-32/A Priyadarshini Colony, Sant Asharam Nagar Phase-1, Bagsewaniya, Bhopal, Madhya Pradesh 462043.' },
-      { question: 'How are Orbit Engineering and Orbit Engineering Solutions related?', answer: 'Orbit Engineering is the main company. Orbit Engineering Solutions is its child company.' },
+      { question: 'How are Orbit Engineering and Orbit Engineering Company related?', answer: 'Orbit Engineering is the main company. Orbit Engineering Company is its child company.' },
       { question: 'Does Orbit Engineering work outside Madhya Pradesh?', answer: 'Orbit’s published service scope covers projects across India. The portfolio includes water and industrial applications in Madhya Pradesh, Chhattisgarh and Odisha. The listed office and project enquiry contact are in Bhopal.' }
     ]
   },

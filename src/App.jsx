@@ -41,7 +41,7 @@ function FloatingWhatsApp() {
         visible ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-90 translate-y-4 pointer-events-none'
       } hover:scale-110 cursor-pointer`}
       title="Chat on WhatsApp"
-      aria-label="Discuss your project with Orbit Engineering on WhatsApp"
+      aria-label="Discuss equipment and project requirements with Orbit Engineering on WhatsApp"
     >
       {/* Ripple ring */}
       {pulse && (

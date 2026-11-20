@@ -1,6 +1,6 @@
 # Orbit Engineering legacy URL migration
 
-Audited on **6 October 2026** using the main company's official domain and its navigation links. The owner selected **https://orbitengineering.com/** as the canonical production origin. **Orbit Engineering Solutions / orbitengineerings.com is the child company**, not a competitor and not the canonical origin for this parent site.
+Audited on **6 October 2026** using the main company's official domain and its navigation links. The owner selected **https://orbitengineering.com/** as the canonical production origin. **Orbit Engineering Company / orbitengineerings.com is the child company**, not a competitor and not the canonical origin for this parent site.
 
 The old homepage links mostly use `www.orbitengineering.com`. Both hostnames were retrievable during this audit; a redirect from `www` to bare was not established. Configure one HTTPS origin and ensure old links resolve to the appropriate replacement. Navigation contains no evidence for the guessed `/profile.html` or `/contact.html` paths; do not invent them as necessary redirects.
 

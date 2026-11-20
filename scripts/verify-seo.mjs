@@ -70,7 +70,7 @@ for (const [route, page] of pages) {
   assert.equal(business?.name, 'Orbit Engineering');
   assert.equal(business.address.postalCode, '462043');
   assert(business.address.streetAddress.startsWith('Ground Floor, B-32/A'), `${route}: inconsistent address`);
-  const child = schema['@graph'].find(node => node.name === 'Orbit Engineering Solutions');
+  const child = schema['@graph'].find(node => node.name === 'Orbit Engineering Company');
   assert.equal(child?.parentOrganization?.['@id'], business['@id'], `${route}: child relationship missing`);
   assert(!json[0][1].includes('aggregateRating'), `${route}: unsupported review markup`);
   const body = html.split('<body')[1];

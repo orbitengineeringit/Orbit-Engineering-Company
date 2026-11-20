@@ -2,17 +2,17 @@
 
 Reviewed: 13 October 2026. Owner-confirmed primary production URL: **https://orbitengineering.com**. All current changes remain local; deployment and external account changes are deferred at the owner's request. See the [90-day growth plan](SEO-GROWTH-PLAN.md) for measurement, content and distribution priorities after an eventual launch.
 
-The goal is more qualified enquiries for **Orbit Engineering**, the primary brand, and its child company **Orbit Engineering Solutions**, through branded, water engineering, automation and local searches. Technical improvements make pages accessible and understandable; rankings also depend on evidence, demand, competition and the searcher's location. Google does not guarantee crawling, indexing or ranking, even for compliant sites. No implementation can guarantee first place for every competitor/client name or availability on every network. [Google: how Search works](https://developers.google.com/search/docs/fundamentals/how-search-works)
+The goal is more qualified enquiries for **Orbit Engineering**, the primary brand, and its child company **Orbit Engineering Company**, through branded, water engineering, automation and local searches. Technical improvements make pages accessible and understandable; rankings also depend on evidence, demand, competition and the searcher's location. Google does not guarantee crawling, indexing or ranking, even for compliant sites. No implementation can guarantee first place for every competitor/client name or availability on every network. [Google: how Search works](https://developers.google.com/search/docs/fundamentals/how-search-works)
 
 **Hindi pointer:** SEO ke liye **Google Search Console** connect karein. Google Cloud Console alag product hai. Pehle correct business details, phir verification, sitemap aur regular monitoring.
 
 ## 1. Confirm the business facts before launch
 
-The owner has selected `https://orbitengineering.com/` for the main Orbit Engineering website. Both bare and `www` hostnames currently expose the legacy parent website; configure a permanent redirect to the selected bare HTTPS origin. `orbitengineerings.com` belongs to the child company Orbit Engineering Solutions and is not the main canonical origin. Preserve legitimate child-company references and existing email addresses; a domain change does not create new email inboxes.
+The owner has selected `https://orbitengineering.com/` for the main Orbit Engineering website. Both bare and `www` hostnames currently expose the legacy parent website; configure a permanent redirect to the selected bare HTTPS origin. `orbitengineerings.com` belongs to the child company Orbit Engineering Company and is not the main canonical origin. Preserve legitimate child-company references and existing email addresses; a domain change does not create new email inboxes.
 
 Use the owner-confirmed brand/address and the existing repository contact details below consistently in `src/config/siteConfig.js`, visible contact information and structured data:
 
-- Primary brand: Orbit Engineering; child company: Orbit Engineering Solutions. The child company is not a competitor.
+- Primary brand: Orbit Engineering; child company: Orbit Engineering Company. The child company is not a competitor.
 - Ground Floor, B-32/A Priyadarshini Colony, Sant Asharam Nagar Phase-1, Bagsewaniya, Bhopal, Madhya Pradesh 462043.
 - Main phone: +91 98930 91450. Secondary: +91 88177 70367.
 - WhatsApp: +91 98930 91450.
@@ -100,7 +100,7 @@ After deployment, test in [PageSpeed Insights](https://pagespeed.web.dev/) and o
 Record a baseline, then review weekly for the first month and monthly thereafter:
 
 - Search Console/Bing indexed canonical URLs, exclusions, crawl/404 errors and sitemap processing.
-- Impressions, clicks and enquiries for Orbit Engineering / Orbit Engineering Solutions, local service terms and real project/client terms; compare country, device and page.
+- Impressions, clicks and enquiries for Orbit Engineering / Orbit Engineering Company, local service terms and real project/client terms; compare country, device and page.
 - AI/citation reporting where available in the verified dashboards, plus meaningful referred enquiries. Bing's cited-page and citation counts describe supported AI surfaces, not ranking position or guaranteed visits. [Bing AI Performance](https://blogs.bing.com/webmaster/2026/2/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview/)
 - Real customer outcomes: calls, qualified forms, WhatsApp enquiries, quotations and awarded projects. Add analytics to the owner's actual property when ready; the repository does not create analytics accounts.
 - Broken assets/links, certificate expiry, office details, project status and outdated specifications. Regenerate the build and sitemap whenever page content changes; use truthful modification dates.

@@ -31,7 +31,7 @@ await writeFile(path.join(output, 'robots.txt'), `User-agent: *\nAllow: /\n${IND
 const discoveryLinks = (type, key) => seoPages.filter(page => page.type === type).map(page => `- [${page[key].shortTitle || page[key].name}](${url(page.path)}): ${page.description}`).join("\n");
 const llms = `# Orbit Engineering
 
-> Water infrastructure, industrial automation and instrumentation engineering in Bhopal, Madhya Pradesh, India. Orbit Engineering Solutions is a child company of Orbit Engineering.
+> Water infrastructure, industrial automation and instrumentation engineering in Bhopal, Madhya Pradesh, India. Orbit Engineering Company is a child company of Orbit Engineering.
 
 This optional directory links to public source pages. Use the pages for full details, assumptions and references.
 

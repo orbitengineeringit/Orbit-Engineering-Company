@@ -1,6 +1,6 @@
 # Bhopal SEO competitor research
 
-Reviewed: **6 October 2026**. Orbit's primary brand is **Orbit Engineering**; **Orbit Engineering Solutions is its child company**, as confirmed by the owner. Neither name belongs in the external competitor list.
+Reviewed: **6 October 2026**. Orbit's primary brand is **Orbit Engineering**; **Orbit Engineering Company is its child company**, as confirmed by the owner. Neither name belongs in the external competitor list.
 
 The following businesses publish both a Bhopal location and services that overlap with Orbit's water treatment, automation or instrumentation offerings. They are credible **service-overlap competitors for local search research**. This is not a ranking leaderboard, a claim that they bid for the same contracts, or an audit of their business quality. Addresses and capabilities below are self-published on their official websites; external registrations, current trading activity, certificates, capacity and partnership status have not been independently audited.
 

@@ -31,7 +31,7 @@ export default function AboutSection({ onOpenQuote }) {
             </h2>
 
             <p className="text-base text-slate-600 leading-relaxed">
-              Founded in 1998 in Bhopal, Madhya Pradesh, <strong className="text-slate-900">Orbit Engineering Solutions (OES)</strong> has evolved into India's foremost water engineering firm. With a portfolio exceeding <strong className="text-orbit-700">₹200+ Crore</strong> and over <strong className="text-orbit-700">150+ mega schemes</strong> delivered, we bring unmatched reliability to government schemes and critical industrial infrastructure.
+              Founded in 1998 in Bhopal, Madhya Pradesh, <strong className="text-slate-900">Orbit Engineering Company</strong> has evolved into India's foremost water engineering firm. With a portfolio exceeding <strong className="text-orbit-700">₹200+ Crore</strong> and over <strong className="text-orbit-700">150+ mega schemes</strong> delivered, we bring unmatched reliability to government schemes and critical industrial infrastructure.
             </p>
 
             {/* Triple ISO Certificate Cards */}

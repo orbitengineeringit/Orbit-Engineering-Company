@@ -281,7 +281,7 @@ function DetailDialog({ item, onClose, onOpenQuote }) {
         )}
         <div className="services-detail-actions">
           <button className="visual-button" onClick={() => { onClose(); onOpenQuote?.(); }}>Request a proposal <ArrowRight size={18} /></button>
-          <a className="visual-button visual-button--secondary" href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`Hello Orbit Engineering, I would like to discuss ${title}.`)}`} target="_blank" rel="noopener noreferrer"><MessageSquare size={18} /> WhatsApp enquiry</a>
+          <a className="visual-button visual-button--secondary" href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`Hello Orbit Engineering Company, I would like to discuss ${title}.`)}`} target="_blank" rel="noopener noreferrer"><MessageSquare size={18} /> WhatsApp enquiry</a>
         </div>
       </div>
     </dialog>

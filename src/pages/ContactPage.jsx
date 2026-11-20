@@ -23,7 +23,7 @@ export default function ContactPage() {
   const selectedService = SERVICE_OPTIONS.find(service => service.id === formData.selectedService);
   const contact = siteConfig.company.contact;
   const office = siteConfig.company.offices[0];
-  const inquiryText = `Hello Orbit Engineering Solutions,\n\nName: ${formData.name || 'Client'}\nOrganization: ${formData.organization || 'N/A'}\nPhone: ${formData.phone || 'N/A'}\nEmail: ${formData.email || 'N/A'}\nInterest: ${formData.serviceType}\n\nProject: ${formData.message || 'I would like a quotation and technical review.'}`;
+  const inquiryText = `Hello Orbit Engineering Company,\n\nName: ${formData.name || 'Client'}\nOrganization: ${formData.organization || 'N/A'}\nPhone: ${formData.phone || 'N/A'}\nEmail: ${formData.email || 'N/A'}\nInterest: ${formData.serviceType}\n\nProject / Equipment Requirements: ${formData.message || 'I would like an equipment quotation and technical review.'}`;
   const whatsappUrl = `https://wa.me/${contact.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(inquiryText)}`;
   const emailUrl = contact.emails?.[0] ? `mailto:${contact.emails[0]}?subject=${encodeURIComponent(`Project inquiry: ${formData.serviceType}`)}&body=${encodeURIComponent(inquiryText)}` : null;
 

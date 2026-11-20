@@ -1,6 +1,6 @@
 # Orbit Engineering website
 
-React/Vite website for Orbit Engineering and its child company Orbit Engineering Solutions. The production build renders every public route to real HTML before hydrating the interactive interface.
+React/Vite website for Orbit Engineering and its child company Orbit Engineering Company. The production build renders every public route to real HTML before hydrating the interactive interface.
 
 ```sh
 npm ci

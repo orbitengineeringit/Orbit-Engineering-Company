@@ -1,8 +1,8 @@
-// Comprehensive data store for Orbit Engineering Solutions
+// Comprehensive data store for Orbit Engineering Company
 export const siteConfig = {
   company: {
     name: "Orbit Engineering",
-    childCompanyName: "Orbit Engineering Solutions",
+    childCompanyName: "Orbit Engineering Company",
     childCompanyUrl: "https://orbitengineerings.com/",
     shortName: "Orbit",
     tagline: "India's Premier Water Infrastructure & Industrial Automation Company",
@@ -51,7 +51,7 @@ export const siteConfig = {
       phonePrimary: "+91 98930 91450",
       phoneSecondary: "+91 88177 70367",
       whatsapp: "+91 98930 91450",
-      whatsappLink: "https://wa.me/919893091450?text=Hello%20Orbit%20Engineering%20Solutions,%20I%20am%20interested%20in%20discussing%20a%20project.",
+      whatsappLink: "https://wa.me/919893091450?text=Hello%20Orbit%20Engineering%20Company,%20I%20would%20like%20to%20discuss%20equipment%20and%20project%20requirements.",
       emails: [],
       hours: "Monday – Saturday: 10:00 AM – 7:00 PM (Sunday Closed)",
       indiamart: "https://www.indiamart.com/orbit-engineering-solutions-bhopal/"

@@ -56,7 +56,7 @@ Set a short weekly review: examine search visibility, indexation and enquiries; 
 
 ## Local and brand discovery
 
-Use the confirmed identity consistently: **Orbit Engineering**, with **Orbit Engineering Solutions** described as its child company. The main domain is `https://orbitengineering.com/`; the child site remains a distinct entity. Do not reclassify the child company as a competitor or silently replace its contact channels.
+Use the confirmed identity consistently: **Orbit Engineering**, with **Orbit Engineering Company** described as its child company. The main domain is `https://orbitengineering.com/`; the child site remains a distinct entity. Do not reclassify the child company as a competitor or silently replace its contact channels.
 
 Use the same address wording across visible pages, structured data and verified listings: **Ground Floor, B-32/A Priyadarshini Colony, Sant Asharam Nagar Phase-1, Bagsewaniya, Bhopal, Madhya Pradesh 462043**. Retain the existing primary phone and email until any changes are confirmed. Reconcile older records; avoid creating duplicate business profiles to occupy more results.
 

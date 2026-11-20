@@ -15,7 +15,7 @@ function QuoteDialog({ onClose }) {
     document.body.style.overflow = 'hidden';
     return () => { node.close(); document.body.style.overflow = previousOverflow; previousFocus?.focus?.(); };
   }, []);
-  const message = ['Hello ' + siteConfig.company.name + ',', '', 'Name: ' + form.name, 'Organization: ' + (form.organization || 'Not specified'), 'Phone: ' + form.phone, 'Email: ' + (form.email || 'Not specified'), 'Interested in: ' + form.service, '', form.message || 'I would like a technical consultation and quote.'].join('\n');
+  const message = ['Hello Orbit Engineering Company,', '', 'Name: ' + form.name, 'Organization: ' + (form.organization || 'Not specified'), 'Phone: ' + form.phone, 'Email: ' + (form.email || 'Not specified'), 'Interested in: ' + form.service, '', form.message || 'I would like an equipment / technical consultation and quote.'].join('\n');
   const change = event => setForm(value => ({ ...value, [event.target.name]: event.target.value }));
   return <dialog ref={dialog} className="orbit-quote" aria-labelledby="quote-title" onCancel={event => { event.preventDefault(); onClose(); }} onClick={event => { if (event.target === event.currentTarget) { const box = event.currentTarget.getBoundingClientRect(); if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) onClose(); } }}>
     <div className="orbit-quote__hero">

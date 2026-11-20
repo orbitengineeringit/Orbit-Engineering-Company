@@ -7,7 +7,7 @@ import ProductCategoryBrowser from './ProductCategoryBrowser';
 import '../styles/product-catalog.css';
 
 const FAMILY_ICONS = { water: Droplets, measurement: Gauge, flow: Waves, connected: Cpu, energy: Sun, advanced: Camera };
-const enquiryUrl = (product, brochure = false) => `https://wa.me/${siteConfig.company.contact.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(`Hello Orbit Engineering Solutions, I would like ${brochure ? 'the brochure and technical specifications' : 'an application consultation and quotation'} for ${product.name} (${product.category}). Please help me select the right configuration.`)}`;
+const enquiryUrl = (product, brochure = false) => `https://wa.me/${siteConfig.company.contact.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(`Hello Orbit Engineering Company, I would like ${brochure ? 'the brochure and technical specifications' : 'an application consultation and quotation'} for ${product.name} (${product.category}). Please help me select the right configuration.`)}`;
 
 function ProductDetails({ product, onClose }) {
   const dialogRef = useRef(null);

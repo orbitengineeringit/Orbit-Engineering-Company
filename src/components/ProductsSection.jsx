@@ -77,7 +77,7 @@ export default function ProductsSection({ onOpenQuote }) {
         <div className="mt-12 glass-panel rounded-2xl p-6 max-w-3xl mx-auto border border-blue-200/80 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-md">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-orbit-900 text-white flex items-center justify-center font-bold text-sm">
-              OES
+              OEC
             </div>
             <div>
               <div className="text-sm font-bold text-slate-900">
